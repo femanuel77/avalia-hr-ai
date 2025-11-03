@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from "recharts";
-import { ArrowLeft, ThumbsUp, ThumbsDown, Sparkles } from "lucide-react";
+import { ArrowLeft, ThumbsUp, ThumbsDown, Sparkles, User, Brain, Award, Briefcase, Mail, Phone, MapPin } from "lucide-react";
 
 const candidato = {
   nome: "Ana Silva Santos",
@@ -31,16 +31,23 @@ const competencias = [
 
 export default function Candidatos() {
   return (
-    <div className="space-y-6 animate-fade-in max-w-6xl">
-      <Button variant="ghost" className="mb-4">
-        <ArrowLeft className="h-4 w-4 mr-2" />
-        Voltar para lista
-      </Button>
+    <div className="container mx-auto px-4 py-8 space-y-6">
+      <div className="animate-fade-in">
+        <div className="flex items-center gap-2 mb-4">
+          <User className="h-8 w-8 text-primary" />
+          <h1 className="text-3xl font-bold tracking-tight">Perfil do Candidato</h1>
+        </div>
+        <p className="text-muted-foreground mb-4">Análise detalhada e resultados do processo seletivo</p>
+        <Button variant="ghost">
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Voltar para lista
+        </Button>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-3">
-        <Card className="md:col-span-1 p-6 shadow-card">
+        <Card className="md:col-span-1 p-6 shadow-card animate-fade-in">
           <div className="flex flex-col items-center text-center space-y-4">
-            <Avatar className="h-24 w-24">
+            <Avatar className="h-24 w-24 border-4 border-primary shadow-glow">
               <AvatarFallback className="text-2xl bg-gradient-ai text-primary-foreground">
                 AS
               </AvatarFallback>
@@ -48,7 +55,10 @@ export default function Candidatos() {
             
             <div>
               <h2 className="text-xl font-bold">{candidato.nome}</h2>
-              <p className="text-sm text-muted-foreground">{candidato.cargo}</p>
+              <div className="flex items-center justify-center gap-1 text-sm text-muted-foreground mt-1">
+                <Briefcase className="h-3 w-3" />
+                <p>{candidato.cargo}</p>
+              </div>
             </div>
 
             <div className="w-full pt-4 border-t">
@@ -62,28 +72,29 @@ export default function Candidatos() {
               <p className="text-xs text-muted-foreground mt-1">Adequação à vaga</p>
             </div>
 
-            <div className="w-full space-y-2 text-sm text-left pt-4 border-t">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Email:</span>
+            <div className="w-full space-y-3 text-sm text-left pt-4 border-t">
+              <div className="flex items-center gap-2">
+                <Mail className="h-4 w-4 text-muted-foreground" />
                 <span className="font-medium">{candidato.email}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Telefone:</span>
+              <div className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-muted-foreground" />
                 <span className="font-medium">{candidato.telefone}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Experiência:</span>
+              <div className="flex items-center gap-2">
+                <Award className="h-4 w-4 text-muted-foreground" />
                 <span className="font-medium">{candidato.experiencia}</span>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card className="md:col-span-2 p-6 shadow-card space-y-6">
+        <Card className="md:col-span-2 p-6 shadow-card space-y-6 animate-fade-in" style={{ animationDelay: '100ms' }}>
           <div>
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <div className="h-8 w-1 bg-gradient-ai rounded-full" />
+              <Brain className="h-5 w-5 text-primary" />
               Análise DISC - Perfil Comportamental
+              <Badge variant="secondary" className="ml-2">Completo</Badge>
             </h3>
             <ResponsiveContainer width="100%" height={300}>
               <RadarChart data={discData}>
@@ -116,7 +127,7 @@ export default function Candidatos() {
 
           <div className="pt-6 border-t">
             <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <div className="h-8 w-1 bg-gradient-ai rounded-full" />
+              <Award className="h-5 w-5 text-secondary" />
               Competências Técnicas (Análise PLN)
             </h3>
             <div className="space-y-4">
@@ -136,9 +147,9 @@ export default function Candidatos() {
         </Card>
       </div>
 
-      <Card className="p-6 shadow-card">
+      <Card className="p-6 shadow-card animate-fade-in" style={{ animationDelay: '200ms' }}>
         <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <div className="h-8 w-1 bg-gradient-ai rounded-full" />
+          <Briefcase className="h-5 w-5 text-primary" />
           Resumo da Experiência
         </h3>
         <p className="text-muted-foreground leading-relaxed mb-4">
@@ -149,12 +160,12 @@ export default function Candidatos() {
           cloud-native.
         </p>
         <div className="flex gap-3 pt-4 border-t">
-          <Button className="flex-1 bg-gradient-ai hover:opacity-90 shadow-glow">
-            <ThumbsUp className="h-5 w-5 mr-2" />
+          <Button className="flex-1 gap-2 bg-gradient-ai hover:opacity-90 shadow-glow">
+            <ThumbsUp className="h-5 w-5" />
             Aprovar para Próxima Fase
           </Button>
-          <Button variant="outline" className="flex-1 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground">
-            <ThumbsDown className="h-5 w-5 mr-2" />
+          <Button variant="outline" className="flex-1 gap-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground">
+            <ThumbsDown className="h-5 w-5" />
             Rejeitar
           </Button>
         </div>

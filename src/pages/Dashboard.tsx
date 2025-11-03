@@ -1,16 +1,17 @@
-import { Briefcase, Users, TrendingUp, Clock } from "lucide-react";
+import { Briefcase, Users, TrendingUp, Clock, Sparkles } from "lucide-react";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { DISCChart } from "@/components/dashboard/DISCChart";
 import { RecruitmentFunnel } from "@/components/dashboard/RecruitmentFunnel";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-6 animate-fade-in">
-      <div>
-        <h1 className="text-3xl font-bold text-foreground mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Visão geral do sistema de recrutamento inteligente
-        </p>
+    <div className="container mx-auto px-4 py-8 space-y-8">
+      <div className="animate-fade-in">
+        <div className="flex items-center gap-2 mb-2">
+          <Sparkles className="h-8 w-8 text-primary animate-pulse-glow" />
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        </div>
+        <p className="text-muted-foreground">Visão geral do sistema de recrutamento inteligente</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
