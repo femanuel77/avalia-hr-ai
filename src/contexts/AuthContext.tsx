@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-interface UserProfile {
+interface CandidatoProfile {
+  tipo: 'candidato';
   email: string;
+  cpf: string;
   nome: string;
   sobrenome: string;
   dataNascimento: string;
@@ -29,6 +31,17 @@ interface UserProfile {
     C: number;
   };
 }
+
+interface EmpregadorProfile {
+  tipo: 'empregador';
+  email: string;
+  cnpj: string;
+  nomeEmpresa: string;
+  endereco: string;
+  telefone: string;
+}
+
+type UserProfile = CandidatoProfile | EmpregadorProfile;
 
 interface AuthContextType {
   isAuthenticated: boolean;

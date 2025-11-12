@@ -23,6 +23,7 @@ export default function Cadastro() {
   const { register } = useAuth();
 
   // Step 1
+  const [cpf, setCpf] = useState('');
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
@@ -50,7 +51,7 @@ export default function Cadastro() {
   });
 
   const handleStep1Next = () => {
-    if (!nome || !sobrenome || !dataNascimento || !email || !celular || !password || !confirmPassword) {
+    if (!cpf || !nome || !sobrenome || !dataNascimento || !email || !celular || !password || !confirmPassword) {
       toast.error('Preencha todos os campos');
       return;
     }
@@ -86,7 +87,9 @@ export default function Cadastro() {
 
   const finalizeCadastro = async () => {
     const userData = {
+      tipo: 'candidato' as const,
       email,
+      cpf,
       nome,
       sobrenome,
       dataNascimento,
@@ -139,6 +142,11 @@ export default function Cadastro() {
             <div className="flex items-center gap-2 mb-4">
               <User className="h-5 w-5 text-primary" />
               <h2 className="text-xl font-semibold">Informações Pessoais</h2>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="cpf">CPF</Label>
+              <Input id="cpf" value={cpf} onChange={(e) => setCpf(e.target.value)} placeholder="000.000.000-00" required />
             </div>
             
             <div className="grid md:grid-cols-2 gap-4">

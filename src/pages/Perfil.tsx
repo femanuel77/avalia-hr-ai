@@ -4,19 +4,69 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
-import { User, GraduationCap, Languages, Sparkles, Brain, Award, Mail, Phone, Calendar, LogOut } from 'lucide-react';
+import { User, GraduationCap, Languages, Sparkles, Brain, Award, Mail, Phone, Calendar, LogOut, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function Perfil() {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
 
   if (!currentUser) {
-    navigate('/login');
-    return null;
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <Card className="p-8 text-center">
+          <p className="text-muted-foreground mb-4">Você precisa estar logado para ver seu perfil.</p>
+          <Link to="/login">
+            <Button>Fazer Login</Button>
+          </Link>
+        </Card>
+      </div>
+    );
   }
 
+  if (currentUser.tipo === 'empregador') {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <Card className="p-8">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-20 w-20 rounded-full bg-gradient-ai flex items-center justify-center">
+              <Building2 className="h-10 w-10 text-primary-foreground" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold">{currentUser.nomeEmpresa}</h1>
+              <p className="text-muted-foreground">{currentUser.email}</p>
+            </div>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-primary" />
+                Informações da Empresa
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-muted-foreground">CNPJ</p>
+                  <p className="font-medium">{currentUser.cnpj}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Telefone</p>
+                  <p className="font-medium">{currentUser.telefone}</p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-sm text-muted-foreground">Endereço</p>
+                  <p className="font-medium">{currentUser.endereco}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
+  // Candidato profile
   const discData = [
     { caracteristica: 'Dominância', value: (currentUser.discProfile.D / 40) * 100 },
     { caracteristica: 'Influência', value: (currentUser.discProfile.I / 40) * 100 },

@@ -6,7 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 export function TopNav() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, currentUser, logout } = useAuth();
   
   const isActive = (path: string) => location.pathname === path;
 
@@ -24,33 +24,50 @@ export function TopNav() {
           </Link>
           
           <div className="hidden md:flex items-center gap-6">
-            <Link
-              to="/dashboard"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/dashboard") ? "text-primary" : "text-muted-foreground"
-              }`}
-            >
-              <LayoutDashboard className="h-4 w-4" />
-              Dashboard
-            </Link>
-            <Link
-              to="/vagas"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/vagas") ? "text-primary" : "text-muted-foreground"
-              }`}
-            >
-              <Briefcase className="h-4 w-4" />
-              Vagas
-            </Link>
-            <Link
-              to="/candidatos"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/candidatos") ? "text-primary" : "text-muted-foreground"
-              }`}
-            >
-              <Users className="h-4 w-4" />
-              Candidatos
-            </Link>
+            {isAuthenticated && currentUser?.tipo === 'empregador' && (
+              <>
+                <Link
+                  to="/dashboard"
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                    isActive("/dashboard") ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard
+                </Link>
+                <Link
+                  to="/minhas-vagas"
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                    isActive("/minhas-vagas") ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  <Briefcase className="h-4 w-4" />
+                  Minhas Vagas
+                </Link>
+              </>
+            )}
+            {isAuthenticated && currentUser?.tipo === 'candidato' && (
+              <>
+                <Link
+                  to="/vagas"
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                    isActive("/vagas") ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  <Briefcase className="h-4 w-4" />
+                  Vagas Disponíveis
+                </Link>
+                <Link
+                  to="/minhas-candidaturas"
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
+                    isActive("/minhas-candidaturas") ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
+                  <Users className="h-4 w-4" />
+                  Minhas Candidaturas
+                </Link>
+              </>
+            )}
           </div>
           
           <div className="flex items-center gap-3">
@@ -72,13 +89,13 @@ export function TopNav() {
                 <Link to="/login">
                   <Button variant="ghost" size="sm" className="gap-2">
                     <LogIn className="h-4 w-4" />
-                    Login
+                    Candidato
                   </Button>
                 </Link>
-                <Link to="/cadastro">
-                  <Button size="sm" className="gap-2 bg-gradient-ai shadow-glow hover:opacity-90">
-                    <UserPlus className="h-4 w-4" />
-                    Cadastrar
+                <Link to="/login-empregador">
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Empregador
                   </Button>
                 </Link>
               </>

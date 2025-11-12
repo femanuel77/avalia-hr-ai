@@ -6,9 +6,9 @@ import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'sonner';
-import { LogIn, Sparkles, Mail, Lock } from 'lucide-react';
+import { Building2, Mail, Lock } from 'lucide-react';
 
-export default function Login() {
+export default function LoginEmpregador() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAuth();
@@ -33,11 +33,11 @@ export default function Login() {
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <div className="h-16 w-16 rounded-full bg-gradient-ai flex items-center justify-center shadow-glow">
-              <Sparkles className="h-8 w-8 text-primary-foreground animate-pulse-glow" />
+              <Building2 className="h-8 w-8 text-primary-foreground animate-pulse-glow" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold mb-2">Portal de Candidaturas</h1>
-          <p className="text-muted-foreground">Entre para se candidatar a vagas</p>
+          <h1 className="text-3xl font-bold mb-2">Portal do Empregador</h1>
+          <p className="text-muted-foreground">Entre para gerenciar suas vagas</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -49,7 +49,7 @@ export default function Login() {
             <Input
               id="email"
               type="email"
-              placeholder="seu@email.com"
+              placeholder="contato@empresa.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -77,22 +77,22 @@ export default function Login() {
             type="submit" 
             className="w-full gap-2 bg-gradient-ai shadow-glow hover:opacity-90 transition-all hover:scale-105"
           >
-            <LogIn className="h-4 w-4" />
-            Entrar como Candidato
+            <Building2 className="h-4 w-4" />
+            Entrar como Empregador
           </Button>
         </form>
 
         <div className="mt-6 text-center space-y-2">
           <p className="text-sm text-muted-foreground">
             Ainda não tem uma conta?{' '}
-            <Link to="/cadastro" className="text-primary font-medium hover:underline">
-              Cadastre-se aqui
+            <Link to="/cadastro-empregador" className="text-primary font-medium hover:underline">
+              Cadastre sua empresa
             </Link>
           </p>
           <p className="text-sm text-muted-foreground">
-            É empregador?{' '}
-            <Link to="/login-empregador" className="text-primary font-medium hover:underline">
-              Acesse o portal do empregador
+            É candidato?{' '}
+            <Link to="/login" className="text-primary font-medium hover:underline">
+              Acesse o portal de candidaturas
             </Link>
           </p>
         </div>

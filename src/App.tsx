@@ -10,7 +10,9 @@ import Dashboard from "./pages/Dashboard";
 import Vagas from "./pages/Vagas";
 import Candidatos from "./pages/Candidatos";
 import Login from "./pages/Login";
+import LoginEmpregador from "./pages/LoginEmpregador";
 import Cadastro from "./pages/Cadastro";
+import CadastroEmpregador from "./pages/CadastroEmpregador";
 import Perfil from "./pages/Perfil";
 import NotFound from "./pages/NotFound";
 
@@ -29,9 +31,13 @@ const App = () => (
               <Routes>
                 <Route path="/" element={<Landing />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/login-empregador" element={<LoginEmpregador />} />
                 <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/cadastro-empregador" element={<CadastroEmpregador />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/vagas" element={<Vagas />} />
+                <Route path="/minhas-vagas" element={<Vagas />} />
+                <Route path="/minhas-candidaturas" element={<Candidatos />} />
                 <Route path="/candidatos" element={<Candidatos />} />
                 <Route path="/perfil" element={<Perfil />} />
                 <Route path="*" element={<NotFound />} />
