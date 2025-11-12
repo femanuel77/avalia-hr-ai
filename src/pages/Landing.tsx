@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   Brain,
   Target,
@@ -18,7 +19,16 @@ import {
 } from "lucide-react";
 
 export default function Landing() {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  const handleComecarAgora = () => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    } else {
+      navigate('/login');
+    }
+  };
 
   const stats = [
     { icon: Users, value: "15.000+", label: "Candidatos Analisados", color: "text-primary" },
@@ -78,7 +88,7 @@ export default function Landing() {
               <Button
                 size="lg"
                 className="gap-2 bg-gradient-ai text-lg shadow-glow hover:opacity-90 animate-pulse-glow"
-                onClick={() => navigate("/dashboard")}
+                onClick={handleComecarAgora}
               >
                 Começar Agora
                 <ArrowRight className="h-5 w-5" />
@@ -190,7 +200,7 @@ export default function Landing() {
                   size="lg"
                   variant="secondary"
                   className="gap-2 text-lg"
-                  onClick={() => navigate("/dashboard")}
+                  onClick={handleComecarAgora}
                 >
                   Iniciar Teste Gratuito
                   <ArrowRight className="h-5 w-5" />

@@ -1,11 +1,19 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus, LayoutDashboard, Briefcase, Users, Settings } from "lucide-react";
+import { LogIn, UserPlus, LayoutDashboard, Briefcase, Users } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function TopNav() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, logout } = useAuth();
   
   const isActive = (path: string) => location.pathname === path;
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
   
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -43,26 +51,38 @@ export function TopNav() {
               <Users className="h-4 w-4" />
               Candidatos
             </Link>
-            <Link
-              to="/configuracoes"
-              className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
-                isActive("/configuracoes") ? "text-primary" : "text-muted-foreground"
-              }`}
-            >
-              <Settings className="h-4 w-4" />
-              Configurações
-            </Link>
           </div>
           
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <LogIn className="h-4 w-4" />
-              Login
-            </Button>
-            <Button size="sm" className="gap-2 bg-gradient-ai shadow-glow hover:opacity-90">
-              <UserPlus className="h-4 w-4" />
-              Cadastrar
-            </Button>
+            {isAuthenticated ? (
+              <>
+                <Link to="/perfil">
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <Users className="h-4 w-4" />
+                    Meu Perfil
+                  </Button>
+                </Link>
+                <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2">
+                  <LogIn className="h-4 w-4" />
+                  Sair
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <LogIn className="h-4 w-4" />
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/cadastro">
+                  <Button size="sm" className="gap-2 bg-gradient-ai shadow-glow hover:opacity-90">
+                    <UserPlus className="h-4 w-4" />
+                    Cadastrar
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
