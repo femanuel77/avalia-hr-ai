@@ -39,6 +39,10 @@ interface EmpregadorProfile {
   nomeEmpresa: string;
   endereco: string;
   telefone: string;
+  website?: string;
+  linkedin?: string;
+  instagram?: string;
+  whatsapp?: string;
 }
 
 type UserProfile = CandidatoProfile | EmpregadorProfile;
