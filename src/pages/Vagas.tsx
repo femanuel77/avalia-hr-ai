@@ -10,51 +10,13 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Plus, TrendingUp, Briefcase, Calendar, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { vagasTableData } from "@/data/vagasData";
 
-const vagas = [
-  {
-    id: 1,
-    titulo: "Desenvolvedor Full Stack",
-    dataCriacao: "15/01/2025",
-    status: "Ativa",
-    scoreMedio: 8.2,
-    candidatos: 34,
-  },
-  {
-    id: 2,
-    titulo: "Designer UX/UI Senior",
-    dataCriacao: "12/01/2025",
-    status: "Ativa",
-    scoreMedio: 7.8,
-    candidatos: 28,
-  },
-  {
-    id: 3,
-    titulo: "Analista de Dados",
-    dataCriacao: "08/01/2025",
-    status: "Ativa",
-    scoreMedio: 8.5,
-    candidatos: 42,
-  },
-  {
-    id: 4,
-    titulo: "Gerente de Projetos",
-    dataCriacao: "05/01/2025",
-    status: "Ativa",
-    scoreMedio: 7.3,
-    candidatos: 19,
-  },
-  {
-    id: 5,
-    titulo: "Especialista em Marketing Digital",
-    dataCriacao: "29/12/2024",
-    status: "Encerrada",
-    scoreMedio: 8.0,
-    candidatos: 51,
-  },
-];
 
 export default function Vagas() {
+  const navigate = useNavigate();
+
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
       <div className="flex items-center justify-between animate-fade-in">
@@ -98,11 +60,12 @@ export default function Vagas() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {vagas.map((vaga, index) => (
+            {vagasTableData.map((vaga, index) => (
               <TableRow 
                 key={vaga.id} 
                 className="hover:bg-muted/50 cursor-pointer transition-all group animate-fade-in"
                 style={{ animationDelay: `${(index + 2) * 100}ms` }}
+                onClick={() => navigate(`/vagas/${vaga.id}`)}
               >
                 <TableCell className="font-medium group-hover:text-primary transition-colors">
                   {vaga.titulo}
