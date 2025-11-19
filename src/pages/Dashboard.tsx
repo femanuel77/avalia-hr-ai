@@ -1,9 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Briefcase, Users, TrendingUp, Clock, Sparkles } from "lucide-react";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { DISCChart } from "@/components/dashboard/DISCChart";
 import { RecruitmentFunnel } from "@/components/dashboard/RecruitmentFunnel";
+import { RetentionChart } from "@/components/dashboard/RetentionChart";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const [showRetentionChart, setShowRetentionChart] = useState(false);
+
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
       <div className="animate-fade-in">
@@ -22,6 +28,7 @@ export default function Dashboard() {
           icon={Briefcase}
           trend="up"
           trendValue="25%"
+          onClick={() => navigate('/vagas')}
         />
         <MetricCard
           title="Candidatos Ativos"
@@ -38,6 +45,7 @@ export default function Dashboard() {
           icon={TrendingUp}
           trend="up"
           trendValue="5%"
+          onClick={() => setShowRetentionChart(true)}
         />
         <MetricCard
           title="Economia de Tempo"
@@ -53,6 +61,11 @@ export default function Dashboard() {
         <DISCChart />
         <RecruitmentFunnel />
       </div>
+
+      <RetentionChart 
+        open={showRetentionChart} 
+        onOpenChange={setShowRetentionChart} 
+      />
     </div>
   );
 }

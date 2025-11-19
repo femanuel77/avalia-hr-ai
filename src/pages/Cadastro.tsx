@@ -38,6 +38,7 @@ export default function Cadastro() {
   ]);
   const [formacoesComplementares, setFormacoesComplementares] = useState<Array<{ nome: string; ano: string; instituicao: string }>>([]);
   const [idiomas, setIdiomas] = useState<Array<{ idioma: string; nivel: string }>>([]);
+  const [experiencias, setExperiencias] = useState<Array<{ cargo: string; empresa: string; periodo: string; atividades: string }>>([]);
   const [softSkills, setSoftSkills] = useState<string[]>([]);
 
   const [step, setStep] = useState(1);
@@ -110,8 +111,9 @@ export default function Cadastro() {
       dataNascimento: formData.dataNascimento,
       celular: formData.celular,
       formacoes,
-      formacoesComplementares,
-      idiomas,
+      formacoesComplementares: formacoesComplementares.length > 0 ? formacoesComplementares : undefined,
+      idiomas: idiomas.length > 0 ? idiomas : undefined,
+      experiencias: experiencias.length > 0 ? experiencias : undefined,
       softSkills,
       discProfile: discScores
     };
@@ -174,6 +176,20 @@ export default function Cadastro() {
     setSoftSkills(prev => 
       prev.includes(skill) ? prev.filter(s => s !== skill) : [...prev, skill]
     );
+  };
+
+  const addExperiencia = () => {
+    setExperiencias([...experiencias, { cargo: '', empresa: '', periodo: '', atividades: '' }]);
+  };
+
+  const removeExperiencia = (index: number) => {
+    setExperiencias(experiencias.filter((_, i) => i !== index));
+  };
+
+  const updateExperiencia = (index: number, field: string, value: string) => {
+    const newExperiencias = [...experiencias];
+    newExperiencias[index] = { ...newExperiencias[index], [field]: value };
+    setExperiencias(newExperiencias);
   };
 
   if (showDISCIntro) {
@@ -489,6 +505,50 @@ export default function Cadastro() {
                         <SelectItem value="fluente">Fluente</SelectItem>
                       </SelectContent>
                     </Select>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <Label className="text-lg">Experiências Profissionais</Label>
+                <Button onClick={addExperiencia} variant="outline" size="sm" className="gap-2">
+                  <Plus className="h-4 w-4" />
+                  Adicionar
+                </Button>
+              </div>
+              
+              {experiencias.map((exp, index) => (
+                <Card key={index} className="p-4 mb-4">
+                  <div className="flex justify-between items-start mb-4">
+                    <h4 className="font-semibold">Experiência {index + 1}</h4>
+                    <Button onClick={() => removeExperiencia(index)} variant="ghost" size="sm">
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
+                  </div>
+                  <div className="space-y-3">
+                    <Input
+                      placeholder="Cargo"
+                      value={exp.cargo}
+                      onChange={(e) => updateExperiencia(index, 'cargo', e.target.value)}
+                    />
+                    <Input
+                      placeholder="Empresa"
+                      value={exp.empresa}
+                      onChange={(e) => updateExperiencia(index, 'empresa', e.target.value)}
+                    />
+                    <Input
+                      placeholder="Período (ex: Jan/2020 - Dez/2022)"
+                      value={exp.periodo}
+                      onChange={(e) => updateExperiencia(index, 'periodo', e.target.value)}
+                    />
+                    <textarea
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[80px]"
+                      placeholder="Principais atividades desempenhadas neste cargo"
+                      value={exp.atividades}
+                      onChange={(e) => updateExperiencia(index, 'atividades', e.target.value)}
+                    />
                   </div>
                 </Card>
               ))}

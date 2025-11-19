@@ -19,12 +19,16 @@ import {
 } from "lucide-react";
 
 export default function Landing() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentUser } = useAuth();
   const navigate = useNavigate();
 
   const handleComecarAgora = () => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      if (currentUser?.tipo === 'candidato') {
+        navigate('/vagas-disponiveis');
+      } else {
+        navigate('/dashboard');
+      }
     } else {
       navigate('/login');
     }
@@ -92,10 +96,6 @@ export default function Landing() {
               >
                 Começar Agora
                 <ArrowRight className="h-5 w-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="gap-2 text-lg">
-                <Shield className="h-5 w-5" />
-                Ver Demonstração
               </Button>
             </div>
           </div>

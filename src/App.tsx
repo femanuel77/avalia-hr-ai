@@ -10,11 +10,14 @@ import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Vagas from "./pages/Vagas";
 import Candidatos from "./pages/Candidatos";
+import MinhasCandidaturas from "./pages/MinhasCandidaturas";
+import VagasDisponiveis from "./pages/VagasDisponiveis";
 import Login from "./pages/Login";
 import LoginEmpregador from "./pages/LoginEmpregador";
 import Cadastro from "./pages/Cadastro";
 import CadastroEmpregador from "./pages/CadastroEmpregador";
 import Perfil from "./pages/Perfil";
+import PerfilEdit from "./pages/PerfilEdit";
 import VagaDetalhes from "./pages/VagaDetalhes";
 import NotFound from "./pages/NotFound";
 
@@ -41,10 +44,12 @@ const App = () => (
             <Route path="/vagas" element={<Vagas />} />
             <Route path="/vagas/:id" element={<VagaDetalhes />} />
             <Route path="/minhas-vagas" element={<Vagas />} />
-                <Route path="/minhas-candidaturas" element={<Candidatos />} />
-                <Route path="/candidatos" element={<Candidatos />} />
-                <Route path="/perfil" element={<Perfil />} />
-                <Route path="*" element={<NotFound />} />
+            <Route path="/minhas-candidaturas" element={<MinhasCandidaturas />} />
+            <Route path="/vagas-disponiveis" element={<VagasDisponiveis />} />
+            <Route path="/candidatos" element={<Candidatos />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/perfil/editar" element={<PerfilEdit />} />
+            <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
           </div>

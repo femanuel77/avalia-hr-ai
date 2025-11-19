@@ -10,18 +10,25 @@ interface CandidatoProfile {
   celular: string;
   formacoes: Array<{
     nivel: string;
+    nomeCurso: string;
     anoInicio: string;
     anoFim: string;
     instituicao: string;
   }>;
-  formacoesComplementares: Array<{
+  formacoesComplementares?: Array<{
     nome: string;
     ano: string;
     instituicao: string;
   }>;
-  idiomas: Array<{
+  idiomas?: Array<{
     idioma: string;
     nivel: string;
+  }>;
+  experiencias?: Array<{
+    cargo: string;
+    empresa: string;
+    periodo: string;
+    atividades: string;
   }>;
   softSkills: string[];
   discProfile: {
