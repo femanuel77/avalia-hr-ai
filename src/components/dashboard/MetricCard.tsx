@@ -8,11 +8,15 @@ interface MetricCardProps {
   icon: LucideIcon;
   trend?: "up" | "down";
   trendValue?: string;
+  onClick?: () => void;
 }
 
-export function MetricCard({ title, value, subtitle, icon: Icon, trend, trendValue }: MetricCardProps) {
+export function MetricCard({ title, value, subtitle, icon: Icon, trend, trendValue, onClick }: MetricCardProps) {
   return (
-    <Card className="shadow-card hover:shadow-glow transition-all duration-300 animate-fade-in">
+    <Card 
+      className={`shadow-card hover:shadow-glow transition-all duration-300 animate-fade-in ${onClick ? 'cursor-pointer' : ''}`}
+      onClick={onClick}
+    >
       <CardContent className="p-6">
         <div className="flex items-start justify-between">
           <div className="flex-1">

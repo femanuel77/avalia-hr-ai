@@ -100,10 +100,15 @@ export default function Perfil() {
             <User className="h-8 w-8 text-primary" />
             <h1 className="text-3xl font-bold tracking-tight">Meu Perfil</h1>
           </div>
-          <Button variant="outline" onClick={handleLogout} className="gap-2">
-            <LogOut className="h-4 w-4" />
-            Sair
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={() => navigate('/perfil/editar')} variant="outline">
+              Editar Perfil
+            </Button>
+            <Button variant="outline" onClick={handleLogout} className="gap-2">
+              <LogOut className="h-4 w-4" />
+              Sair
+            </Button>
+          </div>
         </div>
         <p className="text-muted-foreground">Suas informações e análise comportamental</p>
       </div>
@@ -196,13 +201,14 @@ export default function Perfil() {
             {currentUser.formacoes.map((formacao, idx) => (
               <div key={idx} className="border-l-2 border-primary pl-4">
                 <Badge variant="outline" className="mb-1">{formacao.nivel}</Badge>
-                <p className="font-medium">{formacao.instituicao}</p>
+                <p className="font-medium">{formacao.nomeCurso}</p>
+                <p className="text-sm text-muted-foreground">{formacao.instituicao}</p>
                 <p className="text-sm text-muted-foreground">{formacao.anoInicio} - {formacao.anoFim}</p>
               </div>
             ))}
           </div>
 
-          {currentUser.formacoesComplementares.length > 0 && (
+          {currentUser.formacoesComplementares && currentUser.formacoesComplementares.length > 0 && (
             <>
               <h4 className="text-md font-semibold mt-6 mb-3">Cursos Complementares</h4>
               <div className="space-y-2">
@@ -222,14 +228,18 @@ export default function Perfil() {
             <Languages className="h-5 w-5 text-primary" />
             Idiomas
           </h3>
-          <div className="space-y-3 mb-6">
-            {currentUser.idiomas.map((idioma, idx) => (
-              <div key={idx} className="flex items-center justify-between">
-                <span className="font-medium">{idioma.idioma}</span>
-                <Badge variant="outline" className="border-primary text-primary">{idioma.nivel}</Badge>
-              </div>
-            ))}
-          </div>
+          {currentUser.idiomas && currentUser.idiomas.length > 0 ? (
+            <div className="space-y-3 mb-6">
+              {currentUser.idiomas.map((idioma, idx) => (
+                <div key={idx} className="flex items-center justify-between">
+                  <span className="font-medium">{idioma.idioma}</span>
+                  <Badge variant="outline" className="border-primary text-primary">{idioma.nivel}</Badge>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground mb-6">Nenhum idioma cadastrado</p>
+          )}
 
           <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
             <Award className="h-5 w-5 text-secondary" />
@@ -242,6 +252,25 @@ export default function Perfil() {
           </div>
         </Card>
       </div>
+
+      {currentUser.experiencias && currentUser.experiencias.length > 0 && (
+        <Card className="p-6 shadow-card animate-fade-in" style={{ animationDelay: '400ms' }}>
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Award className="h-5 w-5 text-primary" />
+            Experiências Profissionais
+          </h3>
+          <div className="space-y-4">
+            {currentUser.experiencias.map((exp, idx) => (
+              <div key={idx} className="border-l-2 border-primary pl-4">
+                <p className="font-bold text-lg">{exp.cargo}</p>
+                <p className="font-medium text-muted-foreground">{exp.empresa}</p>
+                <p className="text-sm text-muted-foreground mb-2">{exp.periodo}</p>
+                <p className="text-sm">{exp.atividades}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
     </div>
   );
 }
