@@ -77,7 +77,7 @@ export default function MinhasCandidaturas() {
           <p className="text-muted-foreground mb-6">
             Você ainda não se candidatou a nenhuma vaga. Explore as vagas disponíveis!
           </p>
-          <Button onClick={() => navigate('/vagas-disponiveis')}>
+          <Button onClick={() => navigate('/vagas-disponiveis')}>//
             Ver Vagas Disponíveis
           </Button>
         </Card>

@@ -49,9 +49,9 @@ export function TopNav() {
             {isAuthenticated && currentUser?.tipo === 'candidato' && (
               <>
                 <Link
-                  to="/vagas"
+                  to="/vagas-disponiveis"
                   className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary ${
-                    isActive("/vagas") ? "text-primary" : "text-muted-foreground"
+                    isActive("/vagas-disponiveis") ? "text-primary" : "text-muted-foreground"
                   }`}
                 >
                   <Briefcase className="h-4 w-4" />
