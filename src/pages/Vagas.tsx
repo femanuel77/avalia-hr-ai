@@ -11,11 +11,15 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Plus, TrendingUp, Briefcase, Calendar, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { vagasTableData } from "@/data/vagasData";
 
 
 export default function Vagas() {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  
+  const isEmpregador = currentUser?.tipo === 'empregador';
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-6">
@@ -27,10 +31,15 @@ export default function Vagas() {
           </div>
           <p className="text-muted-foreground">Gerencie as vagas abertas e acompanhe candidatos</p>
         </div>
-        <Button className="gap-2 bg-gradient-ai hover:opacity-90 shadow-glow animate-pulse-glow">
-          <Plus className="h-5 w-5" />
-          Nova Vaga
-        </Button>
+        {isEmpregador && (
+          <Button 
+            className="gap-2 bg-gradient-ai hover:opacity-90 shadow-glow animate-pulse-glow"
+            onClick={() => navigate('/vagas/nova')}
+          >
+            <Plus className="h-5 w-5" />
+            Nova Vaga
+          </Button>
+        )}
       </div>
 
       <Card className="shadow-card animate-fade-in" style={{ animationDelay: '100ms' }}>

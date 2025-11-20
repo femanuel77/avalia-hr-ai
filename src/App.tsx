@@ -9,7 +9,9 @@ import { CandidaturasProvider } from "@/contexts/CandidaturasContext";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Vagas from "./pages/Vagas";
+import NovaVaga from "./pages/NovaVaga";
 import Candidatos from "./pages/Candidatos";
+import VagaDetalhesEmpregador from "./pages/VagaDetalhesEmpregador";
 import MinhasCandidaturas from "./pages/MinhasCandidaturas";
 import VagasDisponiveis from "./pages/VagasDisponiveis";
 import Login from "./pages/Login";
@@ -41,15 +43,18 @@ const App = () => (
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/cadastro-empregador" element={<CadastroEmpregador />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/vagas" element={<Vagas />} />
-            <Route path="/vagas/:id" element={<VagaDetalhes />} />
-            <Route path="/minhas-vagas" element={<Vagas />} />
-            <Route path="/minhas-candidaturas" element={<MinhasCandidaturas />} />
-            <Route path="/vagas-disponiveis" element={<VagasDisponiveis />} />
-            <Route path="/candidatos" element={<Candidatos />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path="/perfil/editar" element={<PerfilEdit />} />
-            <Route path="*" element={<NotFound />} />
+                <Route path="/vagas" element={<Vagas />} />
+                <Route path="/vagas/nova" element={<NovaVaga />} />
+                <Route path="/vagas/:id" element={<VagaDetalhesEmpregador />} />
+                <Route path="/vagas/:vagaId/candidatos/:candidatoId" element={<Candidatos />} />
+                <Route path="/minhas-vagas" element={<Vagas />} />
+                <Route path="/minhas-candidaturas" element={<MinhasCandidaturas />} />
+                <Route path="/vagas-disponiveis" element={<VagasDisponiveis />} />
+                <Route path="/vagas-disponiveis/:id" element={<VagaDetalhes />} />
+                <Route path="/candidatos" element={<Candidatos />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path="/perfil/editar" element={<PerfilEdit />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
           </div>

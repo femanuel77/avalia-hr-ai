@@ -1,4 +1,4 @@
-import { Vaga } from '@/types/vagas';
+import { Vaga, Candidatura } from '@/types/vagas';
 
 export const vagasData: Vaga[] = [
   {
@@ -186,6 +186,60 @@ export const vagasData: Vaga[] = [
   },
 ];
 
+// Candidaturas mockadas
+export const candidaturasMock: Candidatura[] = [
+  {
+    id: 'c1',
+    vagaId: '1',
+    candidatoId: '1',
+    candidatoNome: 'Ana Silva',
+    candidatoEmail: 'ana.silva@email.com',
+    dataInscricao: '2025-01-16',
+    status: 'entrevista-online',
+    discProfile: { D: 75, I: 85, S: 60, C: 70 },
+  },
+  {
+    id: 'c2',
+    vagaId: '1',
+    candidatoId: '2',
+    candidatoNome: 'Carlos Oliveira',
+    candidatoEmail: 'carlos.oliveira@email.com',
+    dataInscricao: '2025-01-17',
+    status: 'analise',
+    discProfile: { D: 55, I: 90, S: 75, C: 65 },
+  },
+  {
+    id: 'c3',
+    vagaId: '2',
+    candidatoId: '1',
+    candidatoNome: 'Ana Silva',
+    candidatoEmail: 'ana.silva@email.com',
+    dataInscricao: '2025-01-14',
+    status: 'finalizacao',
+    discProfile: { D: 75, I: 85, S: 60, C: 70 },
+  },
+  {
+    id: 'c4',
+    vagaId: '2',
+    candidatoId: '3',
+    candidatoNome: 'Mariana Costa',
+    candidatoEmail: 'mariana.costa@email.com',
+    dataInscricao: '2025-01-15',
+    status: 'analise',
+    discProfile: { D: 80, I: 50, S: 55, C: 95 },
+  },
+  {
+    id: 'c5',
+    vagaId: '3',
+    candidatoId: '3',
+    candidatoNome: 'Mariana Costa',
+    candidatoEmail: 'mariana.costa@email.com',
+    dataInscricao: '2025-01-10',
+    status: 'entrevista-presencial',
+    discProfile: { D: 80, I: 50, S: 55, C: 95 },
+  },
+];
+
 // Helper data for displaying in table
 export const vagasTableData = vagasData.map(v => ({
   id: v.id,
@@ -193,5 +247,5 @@ export const vagasTableData = vagasData.map(v => ({
   dataCriacao: new Date(v.dataCriacao).toLocaleDateString('pt-BR'),
   status: v.status === 'aberta' ? 'Ativa' : 'Encerrada',
   scoreMedio: Math.random() * 2 + 7, // Mock score
-  candidatos: Math.floor(Math.random() * 50) + 10, // Mock count
+  candidatos: candidaturasMock.filter(c => c.vagaId === v.id).length,
 }));
