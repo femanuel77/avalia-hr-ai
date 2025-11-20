@@ -55,7 +55,7 @@ export default function VagasDisponiveis() {
                 key={vaga.id}
                 className="p-6 hover:shadow-lg transition-all cursor-pointer animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => navigate(`/vagas/${vaga.id}`)}
+                onClick={() => navigate(`/vagas-disponiveis/${vaga.id}`)}
               >
                 <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                   <div className="flex-1 space-y-3">

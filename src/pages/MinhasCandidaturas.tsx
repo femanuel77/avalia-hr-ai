@@ -88,7 +88,7 @@ export default function MinhasCandidaturas() {
               key={candidatura.vagaId}
               className="p-6 hover:shadow-lg transition-all cursor-pointer animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
-              onClick={() => navigate(`/vagas/${candidatura.vagaId}`)}
+              onClick={() => navigate(`/vagas-disponiveis/${candidatura.vagaId}`)}
             >
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex-1 space-y-3">

@@ -75,28 +75,37 @@ export default function Landing() {
       <section className="relative overflow-hidden border-b">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
         <div className="container relative mx-auto px-4 py-20 md:py-32">
-          <div className="mx-auto max-w-4xl text-center animate-fade-in">
-            <Badge className="mb-6 bg-gradient-ai text-white border-0 shadow-glow">
-              <Sparkles className="mr-1 h-3 w-3" />
-              Recrutamento Inteligente
-            </Badge>
-            <h1 className="mb-6 text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl">
-              Revolucione seu
-              <span className="bg-gradient-ai bg-clip-text text-transparent"> Processo Seletivo</span>
-            </h1>
-            <p className="mb-8 text-lg text-muted-foreground md:text-xl">
-              A Aval.IA utiliza Inteligência Artificial para automatizar a triagem de currículos e análise
-              comportamental DISC, economizando até 75% do tempo em recrutamento.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Button
-                size="lg"
-                className="gap-2 bg-gradient-ai text-lg shadow-glow hover:opacity-90 animate-pulse-glow"
-                onClick={handleComecarAgora}
-              >
-                Começar Agora
-                <ArrowRight className="h-5 w-5" />
-              </Button>
+          <div className="grid lg:grid-cols-2 gap-12 items-center animate-fade-in">
+            <div className="space-y-6">
+              <Badge className="bg-gradient-ai text-white border-0 shadow-glow">
+                <Sparkles className="mr-1 h-3 w-3" />
+                Recrutamento Inteligente
+              </Badge>
+              <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+                Revolucione seu
+                <span className="bg-gradient-ai bg-clip-text text-transparent"> Processo Seletivo</span>
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                A Aval.IA utiliza Inteligência Artificial para automatizar a triagem de currículos e análise
+                comportamental DISC, economizando até 75% do tempo em recrutamento.
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Button
+                  size="lg"
+                  className="gap-2 bg-gradient-ai text-lg shadow-glow hover:opacity-90 animate-pulse-glow"
+                  onClick={handleComecarAgora}
+                >
+                  Começar Agora
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <img 
+                src="/src/assets/avalia-logo.png" 
+                alt="Aval.IA Logo" 
+                className="w-full max-w-md h-auto animate-fade-in"
+              />
             </div>
           </div>
 
